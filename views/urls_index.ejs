@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>TinyApp</title>
+</head>
+
+<body>
+    <%- include partials/_header.ejs %>
+    <p>
+        <% if(user) { %>
+            <h1> Welcome 🐰
+                <%= user.email %> !</h1>
+            <form method="POST" action="/logout">
+                <button type='submit'>Logout</button>
+            </form>
+            <% } else { %>
+                <a href="/register">Sign up Here</a>
+                <a href="/login">Login Here</a>
+                <% } %>
+    </p>
+    <p>Shrink Your URL ⬇️</p>
+    <table>
+    <% for(var key in urls) {%>
+        <p>
+            <tr>
+            <%= key %>
+             &nbsp;
+            <a href=<%=urls[key] %>>
+            <%= urls[key] %></a>
+             &nbsp;
+            <a href="/urls/<%= key %>">Edit</a>
+            <form method="POST" action="/urls/<%= key %>/delete">
+
+                &nbsp;
+                <button type='submit'>🗑</button>
+            </form>
+        </p>
+            </tr>
+   <% } %>
+    </table>
+<form method="GET" action="/urls/new">
+    <button type='submit'>Shrink Me🍼</button>
+</form>
+</body>
+
+</html>
